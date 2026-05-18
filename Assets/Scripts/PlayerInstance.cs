@@ -4,6 +4,8 @@ public class PlayerInstance : MonoBehaviour
 {
     public static PlayerInstance playerInstance;
 
+    public float height = 1f; // Altura para inimigos poderem seguir e atirar
+
     private void Awake()
     {
         playerInstance = this;
