@@ -1652,6 +1652,7 @@ MonoBehaviour:
   supportCooldown: 3
   ultimateCooldown: 30
   bulletPrefab: {fileID: 4192752363767658414, guid: 68495f4fc3636784eb6caa8b909485ad, type: 3}
+  hammerPrefab: {fileID: 3807638919613888259, guid: a8827a91d02e93149bf0e4b2f2095b11, type: 3}
   webPrefab: {fileID: 4614768922765652435, guid: a2509914efcfd8448a450df5531224a4, type: 3}
   bulletSpeed: 20
 --- !u!114 &5535949495178370683

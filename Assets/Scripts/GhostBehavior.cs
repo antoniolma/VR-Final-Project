@@ -42,6 +42,12 @@ public class GhostBehavior : MonoBehaviour
             //source.PlayOneShot(deathSfx);
             EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
             Destroy(gameObject);
+        } else if (collision.gameObject.name.Contains("Hammer"))
+        {
+            collision.gameObject.GetComponent<Hammer>().enemiesKilled++;
+            // source.PlayOneShot(deathSfx);
+            EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 }

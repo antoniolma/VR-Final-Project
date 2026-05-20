@@ -80,6 +80,15 @@ public class LichBehavior : MonoBehaviour
         {
             Destroy(collision.gameObject);
             TakeDamage(1);
+        } else if (collision.gameObject.name.Contains("Hammer"))
+        {
+            collision.gameObject.GetComponent<Hammer>().enemiesKilled++;
+            // source.PlayOneShot(deathSfx);
+            EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
+            TakeDamage(1);
+
+            // Para evitar bugs, martelo morre ao pater em bosses fortes
+            Destroy(collision.gameObject);
         }
     }
 }
