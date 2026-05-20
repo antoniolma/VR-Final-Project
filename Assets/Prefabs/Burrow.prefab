@@ -200,12 +200,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8468963732743909932}
   - component: {fileID: 161236764240343283}
-  - component: {fileID: 5937543738107408480}
   - component: {fileID: 2340482122354600963}
+  - component: {fileID: 5937543738107408480}
   - component: {fileID: 2497576828962749404}
   - component: {fileID: 1531942767177173836}
   m_Layer: 0
-  m_Name: Free Burrow
+  m_Name: Burrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 1746381567195357964}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.08425506, z: -0, w: 0.9964442}
-  m_LocalPosition: {x: -21.41, y: -0.00000011920929, z: 19.98}
+  m_LocalPosition: {x: 1.8742567, y: 4.9990773, z: 0.8081528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -253,22 +253,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5937543738107408480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1746381567195357964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ecd42455008204cbc2c7b9d7ba46dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FreeBurrowBehaviour
-  speed: 2
-  agent: {fileID: 2340482122354600963}
-  source: {fileID: 1531942767177173836}
-  deathSfx: {fileID: 8300000, guid: 82d4121551a114a4ab438311df4b6929, type: 3}
 --- !u!195 &2340482122354600963
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -291,6 +275,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5937543738107408480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746381567195357964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ecd42455008204cbc2c7b9d7ba46dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FreeBurrowBehaviour
+  speed: 2
+  agent: {fileID: 2340482122354600963}
+  source: {fileID: 1531942767177173836}
+  deathSfx: {fileID: 8300000, guid: 82d4121551a114a4ab438311df4b6929, type: 3}
 --- !u!136 &2497576828962749404
 CapsuleCollider:
   m_ObjectHideFlags: 0

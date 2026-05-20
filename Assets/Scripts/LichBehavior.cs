@@ -78,8 +78,8 @@ public class LichBehavior : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("Bullet"))
         {
-            TakeDamage(1);
             Destroy(collision.gameObject);
+            TakeDamage(1);
         }
     }
 }
