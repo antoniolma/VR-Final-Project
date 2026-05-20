@@ -38,7 +38,6 @@ public class LichBehavior : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(transform.position, PlayerInstance.playerInstance.transform.position);
-        Debug.Log(dist);
 
         if (dist < attackRange)
             currentState = STATE_ATTACKING;
@@ -70,6 +69,7 @@ public class LichBehavior : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
             Destroy(gameObject);
         }
     }

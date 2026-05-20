@@ -27,6 +27,7 @@ public class FreeBurrowBehaviour : MonoBehaviour
         {
             Destroy(collision.gameObject);
             source.PlayOneShot(deathSfx);
+            EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
             Destroy(gameObject);
         }
     }
