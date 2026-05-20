@@ -8,8 +8,10 @@ public class DetectGesture : MonoBehaviour
     [SerializeField] private XRHandTrackingEvents handTrackingEvents;
     [SerializeField] private XRHandShape[] handShapes;
     [SerializeField] private float gestureDetectionInterval = 0.1f;
-    [SerializeField] private float minimumDetectionThreshold = 0.9f;
+    [SerializeField] private float minimumDetectionThreshold = 0.8f;
     [SerializeField] private HandShapeCompletenessCalculator handShapeCompletenessCalculator;
+
+    public XRHandShape shapeRecognized;
 
     private float timeOfLastCondition; 
 
@@ -32,7 +34,8 @@ public class DetectGesture : MonoBehaviour
 
             if (detected)
             {
-                Debug.Log($"Hand Gesture Detected: {handShape.name} | Score: {completenessScore}");
+                // Debug.Log($"Hand Gesture Detected: {handShape.name} | Score: {completenessScore}");
+                shapeRecognized = handShape;
             }
         }
         timeOfLastCondition = Time.time;
