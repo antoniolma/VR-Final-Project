@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.XR.Hands.Gestures;
 
 public class PlayerInstance : MonoBehaviour
@@ -34,6 +35,11 @@ public class PlayerInstance : MonoBehaviour
     public float bulletSpeed = 20f;
     private float bulletLifetime = 5f;
 
+    // 0 - Arma | 1 - Martelo
+    public int skillChosen = 1;
+    public bool changeCooldown = true;
+    public List<GameObject> hammersList;
+
     private void Awake()
     {
         playerInstance = this;
@@ -64,6 +70,18 @@ public class PlayerInstance : MonoBehaviour
             isInJackpot = false;
             ControlJackpot();
         }
+
+        if (changeCooldown)
+        {
+            if (skillChosen == 0)
+            {
+                basicCooldown = 0.5f;
+                
+            } else if (skillChosen == 1)
+            {
+                basicCooldown = 10f;
+            }
+        }
     }
 
     // ========================================================
@@ -73,16 +91,24 @@ public class PlayerInstance : MonoBehaviour
         if (Time.time <= basicTime + basicCooldown)
             return;
 
-        if (handShapeRight.name == "Gun_Right" && handShapeLeft.name == "Gun_Left")
+        if (skillChosen == 0)
         {
-            FireBullet();
-            soundController.PlayShootBullet();
-            basicTime = Time.time;
-        } else if (handShapeRight.name == "CallHammer_Right")
-        {
-            SummonHammer();
-            basicTime = Time.time;
+            if (handShapeRight.name == "Gun_Right" && handShapeLeft.name == "Gun_Left")
+            {
+                FireBullet();
+                soundController.PlayShootBullet();
+                basicTime = Time.time;
+            }
         }
+        else if (skillChosen == 1)
+        {
+            if (handShapeRight.name == "CallHammer_Right")
+            {
+                SummonHammer();
+                basicTime = Time.time;
+            }
+        }
+        
     }
 
     public void CheckSupport()
@@ -105,7 +131,7 @@ public class PlayerInstance : MonoBehaviour
 
         if (handShapeRight.name == "Hakari_Right" && handShapeLeft.name == "Hakari_Left")
         {
-            print("JACKPOTTTTTTTTTTTTTTTT");
+            // print("JACKPOTTTTTTTTTTTTTTTT");
             isInJackpot = true;
             ControlJackpot();
             ultimateTime = Time.time;
@@ -162,6 +188,7 @@ public class PlayerInstance : MonoBehaviour
             firePointRight.position,
             Quaternion.Euler(0, firePointRight.rotation.y, 0)
         );
+        hammersList.Add(hammer);
     }
 
     public void FireWeb()
@@ -210,7 +237,17 @@ public class PlayerInstance : MonoBehaviour
         if (isInJackpot)
         {
             soundController.PlayJackpot();
-            basicCooldown /= 10f;
+            if (skillChosen == 0)
+                basicCooldown /= 10f;
+            else if (skillChosen == 1)
+            {
+                basicCooldown = 3f;
+                foreach (var hammer in hammersList) {
+                    hammer.GetComponent<Hammer>().hammerSpeed = 10f;
+                    hammer.GetComponent<Hammer>().maxKillsPerHammer = 6;
+                }    
+            }
+
             supportCooldown /= 10f;
             timeJackpot = Time.time;
 
@@ -218,7 +255,17 @@ public class PlayerInstance : MonoBehaviour
         }
         else
         {
-            basicCooldown *= 10f;
+            if (skillChosen == 0)
+                basicCooldown *= 10f;
+            else if (skillChosen == 1)
+            {
+                basicCooldown = 10f;
+                foreach (var hammer in hammersList) {
+                    hammer.GetComponent<Hammer>().hammerSpeed = 3f;
+                    hammer.GetComponent<Hammer>().maxKillsPerHammer = 3;
+                }    
+            }
+
             supportCooldown *= 10f;
 
             // ADICIONAR ACABOU IMORTALIDADE :(

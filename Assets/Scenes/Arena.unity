@@ -272,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[BuildingBlock] Camera Rig'
       objectReference: {fileID: 0}
+    - target: {fileID: 3331854073332480803, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: skillChosen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5260021428726068527, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_IsActive
       value: 0

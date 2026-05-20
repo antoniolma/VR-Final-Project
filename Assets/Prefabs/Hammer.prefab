@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f1d3935583bca4fb7c8c21f49f8064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  hammerSpeed: 10
+  hammerSpeed: 3
   enemyList: []
   targetRotation: 0
   killDistance: 0.2
   enemiesKilled: 0
+  maxKillsPerHammer: 3
 --- !u!54 &7570391158576762112
 Rigidbody:
   m_ObjectHideFlags: 0
