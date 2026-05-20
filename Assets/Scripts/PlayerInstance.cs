@@ -5,6 +5,7 @@ using UnityEngine.XR.Hands.Gestures;
 public class PlayerInstance : MonoBehaviour
 {
     public static PlayerInstance playerInstance;
+    public PlayerSoundController soundController;
 
     public float height = 1f; // Altura para inimigos poderem seguir e atirar
 
@@ -16,14 +17,14 @@ public class PlayerInstance : MonoBehaviour
     public Transform firePointRight;
 
     // Poses control
-    public float basicCooldown = 1f;
+    public float basicCooldown = 0.5f;
     private float basicTime;
-    public float supportCooldown = 3f;
+    public float supportCooldown = 2f;
     private float supportTime;
-    public float ultimateCooldown = 30f;
+    public float ultimateCooldown = 60f;
     private float ultimateTime;
 
-    private float jackpotDuration = 7f;
+    private float jackpotDuration = 15f;
     private float timeJackpot;
     private bool isInJackpot = false;
 
@@ -75,6 +76,7 @@ public class PlayerInstance : MonoBehaviour
         if (handShapeRight.name == "Gun_Right" && handShapeLeft.name == "Gun_Left")
         {
             FireBullet();
+            soundController.PlayShootBullet();
             basicTime = Time.time;
         }
     }
@@ -87,6 +89,7 @@ public class PlayerInstance : MonoBehaviour
         if (handShapeRight.name == "SpiderMan_Right" && handShapeLeft.name == "SpiderMan_Left")
         {
             FireWeb();
+            soundController.PlayShootWeb();
             supportTime = Time.time;
         }
     }
@@ -96,7 +99,7 @@ public class PlayerInstance : MonoBehaviour
         if (Time.time <= ultimateTime + ultimateCooldown)
             return;
 
-        if (handShapeRight.name == "Hakari_Right" || handShapeLeft.name == "Hakari_Left")
+        if (handShapeRight.name == "Hakari_Right" && handShapeLeft.name == "Hakari_Left")
         {
             print("JACKPOTTTTTTTTTTTTTTTT");
             isInJackpot = true;
@@ -193,16 +196,17 @@ public class PlayerInstance : MonoBehaviour
     {
         if (isInJackpot)
         {
-            basicCooldown = 0.1f;
-            supportCooldown = 0.3f;
+            soundController.PlayJackpot();
+            basicCooldown /= 10f;
+            supportCooldown /= 10f;
             timeJackpot = Time.time;
 
             // ADICIONAR NAO TOMAR DANO
         }
         else
         {
-            basicCooldown = 1f;
-            supportCooldown = 3f;
+            basicCooldown *= 10f;
+            supportCooldown *= 10f;
 
             // ADICIONAR ACABOU IMORTALIDADE :(
         }
