@@ -9,7 +9,8 @@ public class FireballBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Vector3 playerPos = new Vector3(PlayerInstance.playerInstance.transform.position.x, PlayerInstance.playerInstance.height, PlayerInstance.playerInstance.transform.position.z);
+        Vector3 playerPos = PlayerInstance.playerInstance.transform.position;
+        playerPos.y += PlayerInstance.playerInstance.height;
         playerDir = playerPos - transform.position;
         playerDir = playerDir.normalized;
     }

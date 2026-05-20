@@ -5,6 +5,9 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner enemySpawner;
 
     [SerializeField] private GameObject enemyPrefab1;
+    [SerializeField] private float enemy1SpawnChance;
+    [SerializeField] private GameObject enemyPrefab2;
+    [SerializeField] private float enemy2SpawnChance;
 
     [SerializeField] private float baseSpawnRadius = 1f;
     [SerializeField] private float spawnRadiusMult = 15f;
@@ -38,7 +41,17 @@ public class EnemySpawner : MonoBehaviour
             }
             Vector3 spawnModifier = spawnRadiusMult * new Vector3(randomX, 0f, randomZ).normalized + new Vector3(randomPosX, 0f, randomPosZ);
             spawnPosition += spawnModifier;
-            Instantiate(enemyPrefab1, spawnPosition, Quaternion.identity);
+
+            float randomEnemy = Random.Range(0f, 1f);
+            if (randomEnemy < enemy1SpawnChance)
+            {
+                Instantiate(enemyPrefab1, spawnPosition, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(enemyPrefab2, spawnPosition, Quaternion.identity);
+            }
+
             lastSpawned = Time.time;
         }
     }

@@ -6,6 +6,9 @@ public class FreeBurrowBehaviour : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private NavMeshAgent agent;
 
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip deathSfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,5 +19,15 @@ public class FreeBurrowBehaviour : MonoBehaviour
     void Update()
     {
         agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            source.PlayOneShot(deathSfx);
+            Destroy(gameObject);
+        }
     }
 }

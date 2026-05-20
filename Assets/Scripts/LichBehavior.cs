@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class LichBehavior : MonoBehaviour
 {
+    private int health = 3;
+
     [SerializeField] private float speed = 0.5f;
     [SerializeField] private NavMeshAgent agent;
 
@@ -19,6 +21,9 @@ public class LichBehavior : MonoBehaviour
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballLifetime = 5f;
 
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip spawnSfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +31,7 @@ public class LichBehavior : MonoBehaviour
         agent.speed = speed;
         agent.SetDestination(PlayerInstance.playerInstance.transform.position);
         lastAttack = Time.time;
+        source.PlayOneShot(spawnSfx);
     }
 
     // Update is called once per frame
@@ -57,5 +63,23 @@ public class LichBehavior : MonoBehaviour
         GameObject fireball = Instantiate(fireballPrefab, transform.position + attackSpawnPoint.localPosition, Quaternion.identity);
         Destroy(fireball, fireballLifetime);
         lastAttack = Time.time;
+    }
+
+    void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Bullet"))
+        {
+            TakeDamage(1);
+            Destroy(collision.gameObject);
+        }
     }
 }
