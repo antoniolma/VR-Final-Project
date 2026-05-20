@@ -8,6 +8,10 @@ public class GhostBehavior : MonoBehaviour
 
     [SerializeField] private float approachDist = 2f;
 
+    private bool isStunned = false;
+    private float timeStunned;
+    private float durationStun = 4f;
+
     //[SerializeField] private AudioSource source;
     //[SerializeField] private AudioClip deathSfx;
 
@@ -15,12 +19,20 @@ public class GhostBehavior : MonoBehaviour
     void Start()
     {
         agent.speed = speed;
+        durationStun = PlayerInstance.playerInstance.durationStun;
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+        if (!isStunned)
+            agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+
+        if (isStunned && Time.time >= timeStunned + durationStun)
+        {
+            agent.enabled = true;
+            isStunned = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -37,6 +49,12 @@ public class GhostBehavior : MonoBehaviour
             // source.PlayOneShot(deathSfx);
             EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
             Destroy(gameObject);
+        } else if (collision.gameObject.name.Contains("Web"))
+        {
+            print("COLIDIU");
+            agent.enabled = false;
+            isStunned = true;
+            timeStunned = Time.time;
         }
     }
 }

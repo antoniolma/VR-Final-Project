@@ -24,6 +24,10 @@ public class LichBehavior : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip spawnSfx;
 
+    private bool isStunned = false;
+    private float timeStunned;
+    private float durationStun = 4f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +36,7 @@ public class LichBehavior : MonoBehaviour
         agent.SetDestination(PlayerInstance.playerInstance.transform.position);
         lastAttack = Time.time;
         source.PlayOneShot(spawnSfx);
+        durationStun = PlayerInstance.playerInstance.durationStun;
     }
 
     // Update is called once per frame
@@ -48,8 +53,17 @@ public class LichBehavior : MonoBehaviour
             Attack();
         else
         {
-            agent.SetDestination(PlayerInstance.playerInstance.transform.position);
-            agent.speed = speed;
+            if (!isStunned)
+            {
+                agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+                agent.speed = speed;
+            }
+        }
+
+        if (isStunned && Time.time >= timeStunned + durationStun)
+        {
+            agent.enabled = true;
+            isStunned = false;
         }
     }
 
@@ -89,6 +103,11 @@ public class LichBehavior : MonoBehaviour
 
             // Para evitar bugs, martelo morre ao pater em bosses fortes
             Destroy(collision.gameObject);
+        } else if (collision.gameObject.name.Contains("Web"))
+        {
+            agent.enabled = false;
+            isStunned = true;
+            timeStunned = Time.time;
         }
     }
 }

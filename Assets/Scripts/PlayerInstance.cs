@@ -32,6 +32,7 @@ public class PlayerInstance : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject hammerPrefab;
     public GameObject webPrefab;
+    public float durationStun = 4f;
     public float bulletSpeed = 20f;
     private float bulletLifetime = 5f;
 
