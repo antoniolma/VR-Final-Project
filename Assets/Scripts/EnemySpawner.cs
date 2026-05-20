@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
                 }
                 else
                 {
-                    enemy = Instantiate(enemyPrefab2, spawnPosition, Quaternion.identity);
+                    enemy = Instantiate(enemyPrefab2, spawnPosition + new Vector3(0f, 5f, 0f), Quaternion.identity);
                 }
             }
             else

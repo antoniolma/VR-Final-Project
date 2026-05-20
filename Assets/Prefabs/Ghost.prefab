@@ -81,7 +81,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -100,8 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhostBehavior
   speed: 3
   agent: {fileID: 1036752328749663328}
-  heightMod: 3
-  approachDist: 7
+  approachDist: 2
 --- !u!195 &1036752328749663328
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -141,7 +140,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1.3543776
@@ -381,6 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7200572567411103666}
   - component: {fileID: 8995720371476636820}
+  - component: {fileID: 7178878512059419559}
   m_Layer: 0
   m_Name: Little_ghost_ANIMATOR
   m_TagString: Untagged
@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 7787683219631750278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0046240697, y: 0.7244009, z: -0.0194249}
+  m_LocalPosition: {x: -0.0046240697, y: 1.588, z: -0.518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -427,6 +427,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &7178878512059419559
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7787683219631750278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 1.350483
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.17524195, z: -0.0000000033520804}
 --- !u!1 &8585597410228720025
 GameObject:
   m_ObjectHideFlags: 0

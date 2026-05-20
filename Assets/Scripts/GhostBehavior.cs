@@ -6,17 +6,10 @@ public class GhostBehavior : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private NavMeshAgent agent;
 
-    [SerializeField] private float heightMod = 3f;
-
-    [SerializeField] private float approachDist = 7f;
+    [SerializeField] private float approachDist = 2f;
 
     //[SerializeField] private AudioSource source;
     //[SerializeField] private AudioClip deathSfx;
-
-    private void Awake()
-    {
-        transform.position += new Vector3(0f, heightMod, 0f);
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
