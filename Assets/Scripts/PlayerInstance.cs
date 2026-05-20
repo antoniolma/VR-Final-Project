@@ -29,10 +29,10 @@ public class PlayerInstance : MonoBehaviour
     private bool isInJackpot = false;
 
     public GameObject bulletPrefab;
+    public GameObject hammerPrefab;
     public GameObject webPrefab;
     public float bulletSpeed = 20f;
     private float bulletLifetime = 5f;
-    
 
     private void Awake()
     {
@@ -77,6 +77,10 @@ public class PlayerInstance : MonoBehaviour
         {
             FireBullet();
             soundController.PlayShootBullet();
+            basicTime = Time.time;
+        } else if (handShapeRight.name == "CallHammer_Right")
+        {
+            SummonHammer();
             basicTime = Time.time;
         }
     }
@@ -151,6 +155,15 @@ public class PlayerInstance : MonoBehaviour
         Destroy(bulletRight, bulletLifetime);
     }
     
+    public void SummonHammer()
+    {   
+        GameObject hammer = Instantiate(
+            hammerPrefab,
+            firePointRight.position,
+            Quaternion.Euler(0, firePointRight.rotation.y, 0)
+        );
+    }
+
     public void FireWeb()
     {
         // Spawn Bullets
