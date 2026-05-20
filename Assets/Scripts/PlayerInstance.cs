@@ -136,7 +136,7 @@ public class PlayerInstance : MonoBehaviour
         Rigidbody rbRight = bulletRight.GetComponent<Rigidbody>();
         if (rbRight != null)
         {
-            rbRight.linearVelocity = firePointLeft.forward * bulletSpeed;
+            rbRight.linearVelocity = firePointRight.forward * bulletSpeed;
             rbRight.useGravity = false;
         }
 
