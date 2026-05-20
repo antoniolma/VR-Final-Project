@@ -845,7 +845,7 @@ MonoBehaviour:
   attackSpawnPoint: {fileID: 1429648204848878278}
   attackRange: 10
   attackCooldown: 2
-  fireballPrefab: {fileID: 2832572184613670025, guid: 512f7a77c04af704d8d67cb5d48ca0f8, type: 3}
+  fireballPrefab: {fileID: 6373554515513364282, guid: 50e0624a4407cc642a2deb611c11a79b, type: 3}
   fireballLifetime: 5
   source: {fileID: 414044804549560630}
   spawnSfx: {fileID: 8300000, guid: 11c6fe8f1c0436642b800a1795e3b845, type: 3}

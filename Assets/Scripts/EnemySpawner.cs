@@ -15,16 +15,24 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float timeToSpawnNext = 5f;
     private float lastSpawned;
 
+    private bool gameStarted = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         lastSpawned = Time.time;
     }
 
+    public void StartGame()
+    {
+        lastSpawned = Time.time;
+        gameStarted = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastSpawned > timeToSpawnNext)
+        if (Time.time - lastSpawned > timeToSpawnNext && gameStarted)
         {
             Vector3 spawnPosition = PlayerInstance.playerInstance.transform.position;
             float randomX = Random.Range(-1f, 1f);
