@@ -20,18 +20,7 @@ public class GhostBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(transform.position, PlayerInstance.playerInstance.transform.position);
-
-        if (dist < approachDist)
-        {
-            agent.SetDestination(PlayerInstance.playerInstance.transform.position);
-        }
-        else
-        {
-            Vector3 dest = new Vector3(PlayerInstance.playerInstance.transform.position.x, transform.position.y, PlayerInstance.playerInstance.transform.position.z);
-            agent.SetDestination(dest);
-        }
-        
+        agent.SetDestination(PlayerInstance.playerInstance.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private float lastSpawned;
     public List<GameObject> enemiesSpawned = new List<GameObject>();
 
-    private bool gameStarted = true;
+    public bool gameStarted = false;
 
     private void Awake()
     {
@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
                 }
                 else
                 {
-                    enemy = Instantiate(enemyPrefab2, spawnPosition + new Vector3(0f, 5f, 0f), Quaternion.identity);
+                    enemy = Instantiate(enemyPrefab2, spawnPosition, Quaternion.identity);
                 }
             }
             else

@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI hordaText;
 
+    private bool gameStarted = false;
+
     private void Awake()
     {
         startTime = Time.time;
@@ -27,6 +29,18 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (!gameStarted && EnemySpawner.enemySpawner.gameStarted)
+        {
+            gameStarted = true;
+            startTime = Time.time;
+            lastIncreaseHorda = startTime;
+        }
+
+        UpdateSigns();
+    }
+
+    private void UpdateSigns()
     {
         string tempo = "";
 
