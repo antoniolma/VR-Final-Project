@@ -278,6 +278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[BuildingBlock] Camera Rig'
       objectReference: {fileID: 0}
+    - target: {fileID: 3331854073332480803, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4192752363767658414, guid: 68495f4fc3636784eb6caa8b909485ad, type: 3}
     - target: {fileID: 3937328058141295692, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9934727
@@ -297,6 +301,38 @@ PrefabInstance:
     - target: {fileID: 3937328058141295692, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -13.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341013025590553383, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: handShapes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341013025590553383, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: gestureDetectionInterval
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341013025590553383, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: minimumDetectionThreshold
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796951570356624401, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: handShapes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796951570356624401, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: 'handShapes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: adabedaf69a62e34987974044271ea31, type: 2}
+    - target: {fileID: 6796951570356624401, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: 'handShapes.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 74c8016cc2a852640aefb660f2b5cb7b, type: 2}
+    - target: {fileID: 6796951570356624401, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: 'handShapes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 07ff12b72cf951d4bbe819acde4ca0cf, type: 2}
+    - target: {fileID: 6796951570356624401, guid: f0c16069c15d401408d5469664b6949a, type: 3}
+      propertyPath: minimumDetectionThreshold
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8962932315092197886, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_LocalPosition.x
