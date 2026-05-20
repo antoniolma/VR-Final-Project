@@ -878,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1626be90607d25a45b6728d60f9356ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInstance
+  soundController: {fileID: 0}
   height: 1
   detectGestureRight: {fileID: 648545956}
   detectGestureLeft: {fileID: 648545955}
