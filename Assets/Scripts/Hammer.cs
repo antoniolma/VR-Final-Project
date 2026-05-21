@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-    public float hammerSpeed = 10f;
+    public float hammerSpeed = 3f;
 
     public List<GameObject> enemyList;
     public float targetRotation;
 
     public float killDistance = 0.2f; 
     public int enemiesKilled = 0;
+    public int maxKillsPerHammer = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,8 +35,11 @@ public class Hammer : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, center.position, step);
         }
 
-        if (enemiesKilled >= 3)
+        if (enemiesKilled >= maxKillsPerHammer)
+        {
             Destroy(gameObject);
+            PlayerInstance.playerInstance.hammersList.Remove(gameObject);
+        }
     }
 
     public GameObject GetClosestEnemy()

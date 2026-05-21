@@ -9,6 +9,10 @@ public class FreeBurrowBehaviour : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip deathSfx;
 
+    private bool isStunned = false;
+    private float timeStunned;
+    private float durationStun = 4f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +22,14 @@ public class FreeBurrowBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+        if (!isStunned)
+            agent.SetDestination(PlayerInstance.playerInstance.transform.position);
+        
+        if (isStunned && Time.time >= timeStunned + durationStun)
+        {
+            agent.enabled = true;
+            isStunned = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,6 +46,12 @@ public class FreeBurrowBehaviour : MonoBehaviour
             source.PlayOneShot(deathSfx);
             EnemySpawner.enemySpawner.enemiesSpawned.Remove(gameObject);
             Destroy(gameObject);
+        } else if (collision.gameObject.name.Contains("Web"))
+        {
+            print("COLIDIU");
+            agent.enabled = false;
+            isStunned = true;
+            timeStunned = Time.time;
         }
     }
 }

@@ -34,7 +34,7 @@ public class DetectGesture : MonoBehaviour
 
             if (detected)
             {
-                Debug.Log($"Hand Gesture Detected: {handShape.name} | Score: {completenessScore}");
+                // Debug.Log($"Hand Gesture Detected: {handShape.name} | Score: {completenessScore}");
                 shapeRecognized = handShape;
             }
         }
