@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 
     private bool gameStarted = false;
 
+    [SerializeField] private GameObject startSign;
+    [SerializeField] private GameObject signGame;
+    [SerializeField] private GameObject deathCanvas;
+
     private void Awake()
     {
         startTime = Time.time;
@@ -38,6 +42,27 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateSigns();
+
+        if (PlayerInstance.playerInstance.health <= 0 && gameStarted)
+        {
+            deathCanvas.SetActive(true);
+            foreach(var enemy in EnemySpawner.enemySpawner.enemiesSpawned)
+            {
+                Destroy(enemy);
+            }
+            EnemySpawner.enemySpawner.enemiesSpawned = new System.Collections.Generic.List<GameObject>();
+            startSign.SetActive(true);
+            signGame.SetActive(false);
+            PlayerInstance.playerInstance.health = 3;
+            EnemySpawner.enemySpawner.gameStarted = false;
+            gameStarted = false;
+            deathCanvas.SetActive(false);
+        }
+    }
+
+    private void EndGame()
+    {
+
     }
 
     private void UpdateSigns()

@@ -18,6 +18,7 @@ public class GameStarter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         startSign.SetActive(false);
         signGame.SetActive(true);
         EnemySpawner.enemySpawner.StartGame();

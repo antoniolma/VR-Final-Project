@@ -34,6 +34,8 @@ public class PlayerInstance : MonoBehaviour
     public float bulletSpeed = 20f;
     private float bulletLifetime = 5f;
 
+    public int health = 3;
+
     private void Awake()
     {
         playerInstance = this;
@@ -224,5 +226,14 @@ public class PlayerInstance : MonoBehaviour
             // ADICIONAR ACABOU IMORTALIDADE :(
         }
     }
-    
+
+    public void TakeDamage()
+    {
+        health -= 1;
+        foreach (var enemy in EnemySpawner.enemySpawner.enemiesSpawned)
+        {
+            Destroy(enemy);
+        }
+        EnemySpawner.enemySpawner.enemiesSpawned = new System.Collections.Generic.List<GameObject>();
+    }
 }
