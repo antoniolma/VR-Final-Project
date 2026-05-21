@@ -1219,6 +1219,7 @@ MonoBehaviour:
   spawnRadiusMult: 15
   timeToSpawnNext: 5
   enemiesSpawned: []
+  gameStarted: 0
 --- !u!4 &1497014111
 Transform:
   m_ObjectHideFlags: 0
