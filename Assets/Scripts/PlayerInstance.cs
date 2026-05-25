@@ -84,6 +84,7 @@ public class PlayerInstance : MonoBehaviour
             {
                 basicCooldown = 10f;
             }
+            changeCooldown = false;
         }
     }
 

@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8962932315092197886, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.675
       objectReference: {fileID: 0}
     - target: {fileID: 8962932315092197886, guid: f0c16069c15d401408d5469664b6949a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2291,6 +2291,10 @@ PrefabInstance:
     - target: {fileID: 2462451868656808665, guid: b754b14196b1b9f47903e71712d086b0, type: 3}
       propertyPath: m_Name
       value: Grenadier
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462451868656808665, guid: b754b14196b1b9f47903e71712d086b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2462451868657168121, guid: b754b14196b1b9f47903e71712d086b0, type: 3}
       propertyPath: m_LocalPosition.x
