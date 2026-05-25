@@ -13,11 +13,34 @@ public class FireballBehavior : MonoBehaviour
         playerPos.y += PlayerInstance.playerInstance.height;
         playerDir = playerPos - transform.position;
         playerDir = playerDir.normalized;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += speed * playerDir;
+
+        Vector3 playerPos = PlayerInstance.playerInstance.transform.position;
+        Vector3 myPos = transform.position;
+        float dist = Vector3.Distance(playerPos, myPos);
+        if (dist < 2)
+        {
+            PlayerInstance.playerInstance.TakeDamage();
+            Destroy(gameObject);            
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        } else if (collision.gameObject.name.Contains("Hammer"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

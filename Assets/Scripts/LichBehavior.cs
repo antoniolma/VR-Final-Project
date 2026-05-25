@@ -65,6 +65,12 @@ public class LichBehavior : MonoBehaviour
             agent.enabled = true;
             isStunned = false;
         }
+
+        Vector3 playerPos = PlayerInstance.playerInstance.transform.position;
+        Vector3 myPos = transform.position;
+        float dist_damage = Vector3.Distance(playerPos, myPos);
+        if (dist_damage < 1)
+            PlayerInstance.playerInstance.TakeDamage();
     }
 
     void Attack()

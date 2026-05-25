@@ -44,6 +44,15 @@ public class GolemBehavior : MonoBehaviour
         {
             renderer.materials[1].color = blue;
         }
+
+        Vector3 playerPos = PlayerInstance.playerInstance.transform.position;
+        Vector3 myPos = transform.position;
+        float dist = Vector3.Distance(playerPos, myPos);
+        if (dist < 3)
+        {
+            PlayerInstance.playerInstance.TakeDamage();
+            Destroy(gameObject);
+        }
     }
 
     void TakeDamage(int damage)

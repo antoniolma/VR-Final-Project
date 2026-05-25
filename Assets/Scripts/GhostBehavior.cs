@@ -33,6 +33,12 @@ public class GhostBehavior : MonoBehaviour
             agent.enabled = true;
             isStunned = false;
         }
+
+        Vector3 playerPos = PlayerInstance.playerInstance.transform.position;
+        Vector3 myPos = transform.position;
+        float dist = Vector3.Distance(playerPos, myPos);
+        if (dist < 1)
+            PlayerInstance.playerInstance.TakeDamage();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,7 +57,7 @@ public class GhostBehavior : MonoBehaviour
             Destroy(gameObject);
         } else if (collision.gameObject.name.Contains("Web"))
         {
-            print("COLIDIU");
+            // print("COLIDIU");
             agent.enabled = false;
             isStunned = true;
             timeStunned = Time.time;

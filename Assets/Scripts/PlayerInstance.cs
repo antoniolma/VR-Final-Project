@@ -21,6 +21,8 @@ public class PlayerInstance : MonoBehaviour
     // Poses control
     public float basicCooldown = 0.5f;
     private float basicTime;
+    public float hammerCooldown = 10f;
+    private float hammerTime;
     public float supportCooldown = 2f;
     private float supportTime;
     public float ultimateCooldown = 60f;
@@ -67,6 +69,7 @@ public class PlayerInstance : MonoBehaviour
         handShapeLeft = detectGestureLeft.shapeRecognized;
 
         CheckBasic();
+        CheckHammer();
         CheckSupport();
         CheckUltimate();
 
@@ -74,19 +77,6 @@ public class PlayerInstance : MonoBehaviour
         {
             isInJackpot = false;
             ControlJackpot();
-        }
-
-        if (changeCooldown)
-        {
-            if (skillChosen == 0)
-            {
-                basicCooldown = 0.5f;
-                
-            } else if (skillChosen == 1)
-            {
-                basicCooldown = 10f;
-            }
-            changeCooldown = false;
         }
     }
 
@@ -97,24 +87,25 @@ public class PlayerInstance : MonoBehaviour
         if (Time.time <= basicTime + basicCooldown)
             return;
 
-        if (skillChosen == 0)
+        if (handShapeRight?.name == "Gun_Right" && handShapeLeft?.name == "Gun_Left")
         {
-            if (handShapeRight?.name == "Gun_Right" && handShapeLeft?.name == "Gun_Left")
-            {
-                FireBullet();
-                soundController.PlayShootBullet();
-                basicTime = Time.time;
-            }
-        }
-        else if (skillChosen == 1)
-        {
-            if (handShapeRight?.name == "CallHammer_Right")
-            {
-                SummonHammer();
-                basicTime = Time.time;
-            }
+            FireBullet();
+            soundController.PlayShootBullet();
+            basicTime = Time.time;
         }
         
+    }
+
+    public void CheckHammer()
+    {
+        if (Time.time <= hammerTime + hammerCooldown)
+            return;
+
+        if (handShapeRight?.name == "CallHammer_Right")
+        {
+            SummonHammer();
+            hammerTime = Time.time;
+        }
     }
 
     public void CheckSupport()
@@ -243,16 +234,12 @@ public class PlayerInstance : MonoBehaviour
         if (isInJackpot)
         {
             soundController.PlayJackpot();
-            if (skillChosen == 0)
-                basicCooldown /= 10f;
-            else if (skillChosen == 1)
-            {
-                basicCooldown = 3f;
-                foreach (var hammer in hammersList) {
-                    hammer.GetComponent<Hammer>().hammerSpeed = 10f;
-                    hammer.GetComponent<Hammer>().maxKillsPerHammer = 6;
-                }    
-            }
+            basicCooldown /= 10f;
+            hammerCooldown = 3f;
+            foreach (var hammer in hammersList) {
+                hammer.GetComponent<Hammer>().hammerSpeed = 10f;
+                hammer.GetComponent<Hammer>().maxKillsPerHammer = 6;
+            }    
 
             supportCooldown /= 10f;
             timeJackpot = Time.time;
@@ -261,16 +248,12 @@ public class PlayerInstance : MonoBehaviour
         }
         else
         {
-            if (skillChosen == 0)
-                basicCooldown *= 10f;
-            else if (skillChosen == 1)
-            {
-                basicCooldown = 10f;
-                foreach (var hammer in hammersList) {
-                    hammer.GetComponent<Hammer>().hammerSpeed = 3f;
-                    hammer.GetComponent<Hammer>().maxKillsPerHammer = 3;
-                }    
-            }
+            basicCooldown *= 10f;
+            hammerCooldown = 10f;
+            foreach (var hammer in hammersList) {
+                hammer.GetComponent<Hammer>().hammerSpeed = 3f;
+                hammer.GetComponent<Hammer>().maxKillsPerHammer = 3;
+            }    
 
             supportCooldown *= 10f;
 
@@ -282,6 +265,7 @@ public class PlayerInstance : MonoBehaviour
     {
         health -= 1;
         textHealth.text = $"Vidas: {health}";
+        soundController.PlayPlayerDamaged();
         foreach (var enemy in EnemySpawner.enemySpawner.enemiesSpawned)
         {
             Destroy(enemy);

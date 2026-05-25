@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
             startSign.SetActive(true);
             signGame.SetActive(false);
             PlayerInstance.playerInstance.health = 3;
+            PlayerInstance.playerInstance.soundController.PlayGameOver();
             healthText.text = $"Vidas: 3";
             EnemySpawner.enemySpawner.gameStarted = false;
             gameStarted = false;
