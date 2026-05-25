@@ -19,12 +19,16 @@ public class GolemBehavior : MonoBehaviour
     private Color red = new Color(1.55930245f, 0.015431962f, 0, 1);
     private Color blue = new Color(0, 1.1647799f, 1.55930245f, 1f);
 
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip spawnSfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent.speed = speed;
         agent.SetDestination(PlayerInstance.playerInstance.transform.position);
         durationStun = PlayerInstance.playerInstance.durationStun;
+        source.PlayOneShot(spawnSfx);
     }
 
     // Update is called once per frame
