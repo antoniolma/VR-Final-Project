@@ -17,9 +17,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float baseSpawnRadius = 1f;
     [SerializeField] private float spawnRadiusMult = 15f;
 
-    [SerializeField] private float timeToSpawnNext = 5f;
+    [SerializeField] private float timeToSpawnNext = 1.5f;
     private float lastSpawned;
     public List<GameObject> enemiesSpawned = new List<GameObject>();
+
+    [SerializeField] private GameObject golemPrefab;
+    private float lastGolemSpawn;
+    private float golemCooldown = 90f;
 
     public bool gameStarted = false;
 
@@ -37,6 +41,9 @@ public class EnemySpawner : MonoBehaviour
     public void StartGame()
     {
         lastSpawned = Time.time;
+        lastGolemSpawn = lastSpawned;
+        weakEnemyChance = 1.01f;
+        timeToSpawnNext = 1.5f;
         gameStarted = true;
     }
 
@@ -82,6 +89,30 @@ public class EnemySpawner : MonoBehaviour
             enemiesSpawned.Add(enemy);
 
             lastSpawned = Time.time;
+        }
+
+        if (Time.time - lastGolemSpawn > golemCooldown && gameStarted)
+        {
+            Vector3 spawnPosition = PlayerInstance.playerInstance.transform.position;
+            float randomX = Random.Range(-1f, 1f);
+            float randomPosX = Random.Range(baseSpawnRadius, baseSpawnRadius + 1f);
+            if (randomX < 0f)
+            {
+                randomPosX *= -1;
+            }
+            float randomZ = Random.Range(-1f, 1f);
+            float randomPosZ = Random.Range(baseSpawnRadius, baseSpawnRadius + 1f);
+            if (randomZ < 0f)
+            {
+                randomPosZ *= -1;
+            }
+            Vector3 spawnModifier = spawnRadiusMult * new Vector3(randomX, 0f, randomZ).normalized + new Vector3(randomPosX, 0f, randomPosZ);
+            spawnPosition += spawnModifier;
+
+            GameObject enemy = Instantiate(golemPrefab, spawnPosition, Quaternion.identity);
+            enemiesSpawned.Add(enemy);
+
+            lastGolemSpawn = Time.time;
         }
     }
 
