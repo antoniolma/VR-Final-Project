@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.XR.Hands.Gestures;
 
 public class PlayerInstance : MonoBehaviour
@@ -42,6 +43,7 @@ public class PlayerInstance : MonoBehaviour
     public List<GameObject> hammersList;
 
     public int health = 3;
+    [SerializeField] private TextMeshProUGUI textHealth;
 
     private void Awake()
     {
@@ -97,7 +99,7 @@ public class PlayerInstance : MonoBehaviour
 
         if (skillChosen == 0)
         {
-            if (handShapeRight.name == "Gun_Right" && handShapeLeft.name == "Gun_Left")
+            if (handShapeRight?.name == "Gun_Right" && handShapeLeft?.name == "Gun_Left")
             {
                 FireBullet();
                 soundController.PlayShootBullet();
@@ -106,7 +108,7 @@ public class PlayerInstance : MonoBehaviour
         }
         else if (skillChosen == 1)
         {
-            if (handShapeRight.name == "CallHammer_Right")
+            if (handShapeRight?.name == "CallHammer_Right")
             {
                 SummonHammer();
                 basicTime = Time.time;
@@ -120,7 +122,7 @@ public class PlayerInstance : MonoBehaviour
         if (Time.time <= supportTime + supportCooldown)
             return;
 
-        if (handShapeRight.name == "SpiderMan_Right" && handShapeLeft.name == "SpiderMan_Left")
+        if (handShapeRight?.name == "SpiderMan_Right" && handShapeLeft?.name == "SpiderMan_Left")
         {
             FireWeb();
             soundController.PlayShootWeb();
@@ -133,7 +135,7 @@ public class PlayerInstance : MonoBehaviour
         if (Time.time <= ultimateTime + ultimateCooldown)
             return;
 
-        if (handShapeRight.name == "Hakari_Right" && handShapeLeft.name == "Hakari_Left")
+        if (handShapeRight?.name == "Hakari_Right" && handShapeLeft?.name == "Hakari_Left")
         {
             // print("JACKPOTTTTTTTTTTTTTTTT");
             isInJackpot = true;
@@ -279,6 +281,7 @@ public class PlayerInstance : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
+        textHealth.text = $"Vidas: {health}";
         foreach (var enemy in EnemySpawner.enemySpawner.enemiesSpawned)
         {
             Destroy(enemy);
